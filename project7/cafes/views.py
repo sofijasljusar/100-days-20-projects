@@ -35,3 +35,19 @@ class CafeList(ListView):
     context_object_name = 'cafes_list'
     paginate_by = 5
 
+
+class CafeDetail(DetailView):
+    model = Cafe
+    template_name = "cafe-detail.html"
+    context_object_name = "cafe"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cafe = self.get_object()
+        context['features'] = [
+            {'label': 'Wi-Fi', 'value': cafe.has_wifi},
+            {'label': 'Sockets', 'value': cafe.has_sockets},
+            {'label': 'Toilet', 'value': cafe.has_toilet},
+            {'label': 'Can take calls', 'value': cafe.can_take_calls}
+        ]
+        return context

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container fullscreen-container">
+
+        <div class="row pt-5 pb-5">
+
+            <div class="col-12 col-md-6">
+                <img class="img-fluid rounded cafe-img-detail" src="{{ cafe.img_url }}" alt="cafe image">
+            </div>
+
+            <div class="col-12 col-md-6 ps-5">
+
+                <h1 class="pt-3 pb-3 fw-bold display-5">{{ cafe.name }}</h1>
+                <p class="fs-5">Location: <span class="text-info">{{ cafe.location }}</span></p>
+                <p class="fs-5">Coffee price: <span class="text-info">{{ cafe.coffee_price }}</span></p>
+                <p class="fs-5">Seats: <span class="text-info">{{ cafe.seats }}</span></p>
+
+                <br>
+
+                {% for feature in features %}
+                    <p class="fs-5 d-flex align-items-center">
+                    {% if feature.value %}
+                        <img src="{% static 'project7/images/check_box_yes.svg' %}"
+                             class="inline-icon me-2" alt="{{ feature.label }} available">
+                    {% else %}
+                        <img src="{% static 'project7/images/check_box_no.svg' %}"
+                             class="inline-icon me-2" alt="No {{ feature.label }}">
+                    {% endif %}
+                    {{ feature.label }}
+                </p>
+                {% endfor %}
+
+                <br>
+
+                <a class="fs-5 text-info" href="{{ cafe.map_url }}">View on map</a>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

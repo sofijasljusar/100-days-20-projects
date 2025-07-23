@@ -5,7 +5,7 @@
      <div class="container d-flex flex-column align-items-center mt-3">
 
          {% for cafe in cafes_list %}
-            <div class="card mb-3 mt-3 w-100" style="max-width: 900px;">
+            <div class="card mb-3 mt-3 w-100">
               <div class="row g-0">
                 <div class="col-md-5">
                   <img src="{{ cafe.img_url }}"
@@ -16,7 +16,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ cafe.name }}</h5>
                     <p class="card-text">Location: {{ cafe.location }}</p>
-                    <a class="text-info" href="#" style="cursor: pointer;"><small>Details</small></a>
+                    <a class="text-info" href="{% url 'detail' cafe.id %}" style="cursor: pointer;"><small>Details</small></a>
                   </div>
                 </div>
               </div>
