@@ -6,5 +6,5 @@ router = DefaultRouter()
 router.register(r'cafes', CafeViewSet)
 
 urlpatterns = [path('', include(router.urls)),
-               path('random/', RandomCafeView.as_view(), name="random"),
-               path('search/', CafeSearchView.as_view(), name="search")]
+               path('random/', RandomCafeView.as_view(), name="random-api"),
+               path('search/', CafeSearchView.as_view(), name="search-api")]

@@ -23,10 +23,24 @@ class RandomCafeView(views.APIView):
 class CafeSearchView(views.APIView):
     def get(self, request):
         location = request.GET.get('loc')
-        cafes = Cafe.objects.filter(location=location)
+        cafes = Cafe.objects.filter(location__icontains=location)  # icontains for partial or case-insensitive match
         if cafes:
             return Response({'cafes': CafeSerializer(cafes, many=True).data})
         return Response({'error': 'No cafes found at this location'}, status=404)
+
+
+class CafeSearchListView(ListView):
+    model = Cafe
+    template_name = "cafes-list.html"
+    context_object_name = "cafes_list"
+    paginate_by = 3
+
+    def get_queryset(self):
+        query = self.request.GET.get('loc')
+        if query:
+            return Cafe.objects.filter(location__icontains=query)
+        return Cafe.objects.none()
+
 
 
 class CafeList(ListView):
