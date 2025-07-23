@@ -1,0 +1,13 @@
+.cafe-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.page-item.active .page-link {
+    background-color: #343a40 !important; /* Dark background */
+    border-color: #343a40 !important;
+    color: #fff !important;              /* White text */
+    box-shadow: none !important;         /* Remove any glowing/shiny effect */
+}

@@ -27,3 +27,11 @@ class CafeSearchView(views.APIView):
         if cafes:
             return Response({'cafes': CafeSerializer(cafes, many=True).data})
         return Response({'error': 'No cafes found at this location'}, status=404)
+
+
+class CafeList(ListView):
+    queryset = Cafe.objects.all()
+    template_name = "cafes-list.html"
+    context_object_name = 'cafes_list'
+    paginate_by = 5
+
