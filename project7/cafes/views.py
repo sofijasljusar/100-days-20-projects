@@ -4,10 +4,11 @@ from .models import Cafe
 from .serializers import CafeSerializer
 import random
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
-from .forms import CafeForm
-
+from .forms import CafeForm, SignUpForm
+from django.contrib.auth import login
+from django.shortcuts import redirect
 
 class CafeViewSet(viewsets.ModelViewSet):
     queryset = Cafe.objects.all()
@@ -87,3 +88,14 @@ class CafeUpdateView(UpdateView):
 class CafeDeleteView(DeleteView):
     model = Cafe
     success_url = reverse_lazy('home')
+
+
+class SignUpView(FormView):
+    template_name = 'signup.html'
+    form_class = SignUpForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect(self.get_success_url())
