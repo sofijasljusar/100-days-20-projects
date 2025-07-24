@@ -21,8 +21,7 @@ class Cafe(models.Model):
     coffee_price = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
-        managed = False  # connecting to existing db (still read/write without managing structure)
-        db_table = 'cafe'
+        db_table = 'cafes_cafe'
 
     def __str__(self):
         return self.name

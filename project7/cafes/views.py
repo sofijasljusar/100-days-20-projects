@@ -9,6 +9,8 @@ from django.urls import reverse_lazy
 from .forms import CafeForm, SignUpForm
 from django.contrib.auth import login
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class CafeViewSet(viewsets.ModelViewSet):
     queryset = Cafe.objects.all()
@@ -46,7 +48,6 @@ class CafeSearchListView(ListView):
         return Cafe.objects.none()
 
 
-
 class CafeList(ListView):
     queryset = Cafe.objects.all()
     template_name = "cafes-list.html"
@@ -71,7 +72,7 @@ class CafeDetail(DetailView):
         return context
 
 
-class CafeCreateView(CreateView):
+class CafeCreateView(LoginRequiredMixin, CreateView):
     model = Cafe
     form_class = CafeForm
     template_name = 'cafe-form.html'
