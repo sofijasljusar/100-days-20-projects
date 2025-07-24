@@ -4,7 +4,7 @@ from .models import Cafe
 from .serializers import CafeSerializer
 import random
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .forms import CafeForm
 
@@ -72,7 +72,18 @@ class CafeDetail(DetailView):
 
 class CafeCreateView(CreateView):
     model = Cafe
-    # fields = ['name', 'location', 'img_url', 'coffee_price', 'seats', 'has_wifi', 'has_sockets', 'has_toilet', 'can_take_calls']
     form_class = CafeForm
-    template_name = 'add-cafe.html'
+    template_name = 'cafe-form.html'
+    success_url = reverse_lazy('home')
+
+
+class CafeUpdateView(UpdateView):
+    model = Cafe
+    form_class = CafeForm
+    template_name = 'cafe-form.html'
+    success_url = reverse_lazy('home')
+
+
+class CafeDeleteView(DeleteView):
+    model = Cafe
     success_url = reverse_lazy('home')
